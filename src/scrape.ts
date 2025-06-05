@@ -14,21 +14,23 @@ export async function getCurrentSong(): Promise<Song> {
 
     try {
       browser = await puppeteer.launch({
-        args: ["--no-sandbox"]
+        args: ["--no-sandbox"],
       });
 
       const page = await browser.newPage();
 
       await page.goto(config.JOE_URL, {
         waitUntil: "networkidle2",
-        timeout: 20000
+        timeout: 20000,
       });
 
       await page.waitForSelector("#main");
 
       const result: Song | null = await page.evaluate(() => {
         // @ts-ignore
-        const container = document.querySelector("#main > div > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2)");
+        const container = document.querySelector(
+          "#main > div > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2)",
+        );
 
         if (!container) return null;
 
@@ -42,7 +44,9 @@ export async function getCurrentSong(): Promise<Song> {
       });
 
       if (!result?.name || !result?.artist) {
-        throw new Error(`Could not extract song info: ${JSON.stringify(result)}`);
+        throw new Error(
+          `Could not extract song info: ${JSON.stringify(result)}`,
+        );
       }
 
       return result;

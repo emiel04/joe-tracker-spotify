@@ -1,4 +1,4 @@
-import config from "../config"
+import config from "../config";
 import type { Song } from "../domain/song";
 import { getSpotifySdk } from "./auth";
 import logger from "../logger";
@@ -6,7 +6,9 @@ import logger from "../logger";
 const sdk = await getSpotifySdk();
 
 export async function addSongToSpotifyPlaylist(song: Song): Promise<void> {
-  const searchResult = await sdk.search(`${song.name} ${song.artist}`, ["track"]);
+  const searchResult = await sdk.search(`${song.name} ${song.artist}`, [
+    "track",
+  ]);
 
   const track = searchResult.tracks?.items?.[0];
   if (!track) {
@@ -14,9 +16,7 @@ export async function addSongToSpotifyPlaylist(song: Song): Promise<void> {
     return;
   }
 
-  await sdk.playlists.addItemsToPlaylist(config.PLAYLIST_ID, [
-    track.uri
-  ]);
+  await sdk.playlists.addItemsToPlaylist(config.PLAYLIST_ID, [track.uri]);
 
   logger.info(`Added: ${track.name} by ${track.artists[0]!.name}`);
 }

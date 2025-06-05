@@ -3,6 +3,14 @@ import logger from "./logger.ts";
 import { getCurrentSong } from "./scrape.ts";
 import { addSongToSpotifyPlaylist } from "./spotify/spotify.ts";
 
+process.once("SIGINT", () => {
+  process.exit(0);
+});
+
+process.once("SIGTERM", () => {
+  process.exit(0);
+});
+
 let last = "";
 
 async function run() {

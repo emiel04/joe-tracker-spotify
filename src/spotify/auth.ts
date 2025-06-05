@@ -13,8 +13,6 @@ type SpotifyTokenResponse = {
   expires?: number;
 };
 
-
-
 async function getAccessToken(): Promise<SpotifyTokenResponse> {
   const params = new URLSearchParams();
   params.append("grant_type", "refresh_token");

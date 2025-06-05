@@ -27,12 +27,12 @@ app.get("/callback", async (req, res) => {
     body: params,
   });
 
-  const tokenData = await tokenResponse.json() as any;
+  const tokenData = (await tokenResponse.json()) as any;
 
   console.log("Access Token:", tokenData.access_token);
   console.log("Refresh Token:", tokenData.refresh_token);
   res.send(
-    "Authorization successful! You can close this tab and save the refresh token shown in console."
+    "Authorization successful! You can close this tab and save the refresh token shown in console.",
   );
   process.exit(0);
 });
