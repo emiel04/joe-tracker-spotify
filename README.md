@@ -1,15 +1,26 @@
-# joe-80s-90s-tracker
+# Joe tracker
 
-To install dependencies:
+A small service that scrapes the current song playing on the Joe sit and adds it to a Spotify playlist automatically.
 
-```bash
-bun install
-```
+Currently only tested with
+- [Joe 80s 90s](https://joe.be/luister/joe_80s_90s)
 
-To run:
+## Features
+- Scrapes current song and artist info
+- Searches the song on spotify and adds it to a configured playlist
 
-```bash
-bun run
-```
+## Setup
+1. Clone the repo
+2. Install dependencies
 
-This project was created using `bun init` in bun v1.2.15. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+`bun install`
+
+3. Get spotify refresh token with the [`scripts/get_refresh_token.ts`](./scripts/get_refresh_token.ts) script.
+
+4. Pass env variables based on the [`.env.example`](./.env.example)
+
+5. Run with `bun run start`
+
+## Docker
+
+Just make sure the correct env variables are passed to docker and it should work. You should still get your spotify refresh token.
