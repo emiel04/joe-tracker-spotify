@@ -1,0 +1,20 @@
+{
+  "name": "joe-80s-90s-tracker",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/express": "^5.0.2"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@spotify/web-api-ts-sdk": "^1.2.0",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "node-fetch": "^3.3.2",
+    "open": "^10.1.2",
+    "pino": "^9.7.0",
+    "puppeteer": "^24.10.0"
+  }
+}
