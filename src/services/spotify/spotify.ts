@@ -1,11 +1,11 @@
 import config from "../../core/config";
 import type { Song } from "../../core/domain/song";
-import { getSpotifySdk } from "./auth";
+import { getCachedSpotifySdk } from "./auth";
 import logger from "../../core/logger";
 
-const sdk = await getSpotifySdk();
-
 export async function addSongToSpotifyPlaylist(song: Song): Promise<void> {
+  const sdk = await getCachedSpotifySdk();
+
   const searchResult = await sdk.search(`${song.name} ${song.artist}`, [
     "track",
   ]);

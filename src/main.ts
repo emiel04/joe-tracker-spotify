@@ -33,7 +33,7 @@ async function startWithRestart() {
       await run();
     } catch (err) {
       logger.error("Crashed with error:");
-      logger.error(err)
+      logger.error(err);
       logger.info("Restarting...");
       await new Promise((r) => setTimeout(r, 1000));
     }

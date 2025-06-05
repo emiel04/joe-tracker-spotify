@@ -42,3 +42,17 @@ export async function getSpotifySdk(): Promise<SpotifyApi> {
   const token = await getAccessToken();
   return SpotifyApi.withAccessToken(clientId, token);
 }
+
+let cachedSdk: SpotifyApi | null = null;
+let cacheExpiresAt = 0;
+
+export async function getCachedSpotifySdk() {
+  const now = Date.now();
+
+  if (!cachedSdk || now >= cacheExpiresAt) {
+    cachedSdk = await getSpotifySdk();
+    cacheExpiresAt = now + 5 * 60 * 1000; // cache for 5 minutes
+  }
+
+  return cachedSdk;
+}
