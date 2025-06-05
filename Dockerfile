@@ -1,8 +1,13 @@
 # ---- Base: Use official Bun image ----
-  FROM oven/bun:slim as base
+  FROM oven/bun:slim
 
-  # Install dependencies required for Puppeteer (Chromium)
+  # Environment variables to avoid Puppeteer downloading Chromium
+  ENV PUPPETEER_SKIP_DOWNLOAD=true
+  ENV PUPPETEER_EXECUTABLE_PATH="/usr/bin/chromium"
+  
+  # Install Chromium + dependencies for Puppeteer
   RUN apt-get update && apt-get install -y \
+      chromium \
       ca-certificates \
       fonts-liberation \
       libappindicator3-1 \
@@ -20,7 +25,6 @@
       libxdamage1 \
       libxrandr2 \
       xdg-utils \
-      wget \
       --no-install-recommends && \
       apt-get clean && \
       rm -rf /var/lib/apt/lists/*
@@ -28,18 +32,12 @@
   # Create app directory
   WORKDIR /app
   
-  # Copy app files
+  # Copy everything
   COPY . .
   
-  # Install Bun deps
+  # Install dependencies
   RUN bun install
   
-  # Puppeteer will download Chromium the first time it runs
-  ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=false
-  
-  # Expose port if you add a web server (optional)
-  # EXPOSE 3000
-  
-  # Run the script (change entrypoint if needed)
+  # Define command
   CMD ["bun", "run", "start"]
   
