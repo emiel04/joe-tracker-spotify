@@ -5,6 +5,9 @@
     "@types/bun": "latest",
     "@types/express": "^5.0.2"
   },
+  "scripts": {
+    "start": "bun run src/main.ts"
+  },
   "peerDependencies": {
     "typescript": "^5"
   },
