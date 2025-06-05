@@ -1,7 +1,7 @@
-import config from "./config.ts";
-import logger from "./logger.ts";
-import { getCurrentSong } from "./scrape.ts";
-import { addSongToSpotifyPlaylist } from "./spotify/spotify.ts";
+import config from "./core/config.ts";
+import logger from "./core/logger.ts";
+import { getCurrentSong } from "./services/scraper";
+import { addSongToSpotifyPlaylist } from "./services/spotify";
 
 process.once("SIGINT", () => {
   process.exit(0);
